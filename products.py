@@ -51,7 +51,6 @@ class Product:
         """Displays the product's details."""
 
         product_info = f"{self.name}, Price: {self.price}, Quantity: {self.quantity}"
-        print(product_info)
         return product_info
 
     def buy(self, quantity: int) -> float:
@@ -63,7 +62,7 @@ class Product:
             raise ValueError("Insufficient product quantity.")
 
         total_price = self.price * quantity
-        self.quantity -= quantity
+        self.set_quantity(self.quantity + quantity)
 
         if self.quantity == 0:
             self.deactivate()

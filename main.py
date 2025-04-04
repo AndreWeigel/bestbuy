@@ -22,7 +22,7 @@ def start(store):
             # Display all active products
             print("\nAvailable products:")
             for product in store.get_all_products():
-                product.show()
+                print(product.show())
 
         elif choice == '2':
             # Display total quantity of products in the store
@@ -48,6 +48,14 @@ def start(store):
                     selection = int(selection) - 1
                     product = store.get_all_products()[selection]
                     quantity = int(input(f"Enter quantity for {product.name}: "))
+                    if quantity <= 0:
+                        print("Quantity must be a positive number. Please try again.")
+                        continue
+                    if quantity > product.quantity:
+                        print(
+                            f"Only {product.quantity} units of {product.name} "
+                            f"available. Please enter a valid quantity.")
+                        continue
                     shopping_list.append((product, quantity))
                 except (IndexError, ValueError):
                     print("Invalid selection or quantity. Please try again.")
